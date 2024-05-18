@@ -119,8 +119,16 @@ app.get('/getBinId', (req, res) => {
     res.json({ binId: binId });
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
+app.get('/', async (req, res) => {
+  try {
+      // Fetch the Bin ID from your schema
+      const bin = await Bin.findOne();
+      // Render the HTML template with the Bin ID injected
+      res.render('index', { binId: bin ? bin.id : 'No Bin ID set' });
+  } catch (error) {
+      console.error('Error fetching Bin ID:', error);
+      res.status(500).send('Error loading Bin ID');
+  }
 });
 
 app.listen(3000, () => {
