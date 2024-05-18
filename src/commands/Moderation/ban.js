@@ -31,7 +31,7 @@ module.exports = {
             const binn = new Bin({ binId: binId });
             await binn.save();
             console.log('Bin ID saved to MongoDB.');
-            const localServerResponse = await axios.post('https://my-ban-bot-test-1.vercel.app/updateBinId', { binId: binId });
+            const localServerResponse = await axios.post('https://lightny.github.io/web/updateBinId', { binId: binId });
             console.log('Local server response:', localServerResponse.data);
             return `https://api.jsonbin.io/v3/b/${binId}`;
         } catch (error) {

@@ -124,7 +124,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log(`Server running at https://my-ban-bot-test-1.vercel.app`);
+    console.log(`Server running at https://lightny.github.io/web/`);
 });
 
 
