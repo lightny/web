@@ -123,7 +123,7 @@ app.get('/', async (req, res) => {
   try {
     const bin = await Bin.findOne();
     const binId = bin ? bin.binId : 'No Bin ID set';
-    res.send(`
+    const html = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -136,7 +136,8 @@ app.get('/', async (req, res) => {
           <p id="binId">${binId}</p>
       </body>
       </html>
-    `);
+    `;
+    res.send(html);
   } catch (error) {
     res.status(500).send('Internal server error');
   }
