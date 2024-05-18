@@ -121,13 +121,24 @@ app.get('/getBinId', (req, res) => {
 
 app.get('/', async (req, res) => {
   try {
-      // Fetch the Bin ID from your schema
-      const bin = await Bin.findOne();
-      // Render the HTML template with the Bin ID injected
-      res.render('index', { binId: bin ? bin.id : 'No Bin ID set' });
+    const bin = await Bin.findOne();
+    const binId = bin ? bin.binId : 'No Bin ID set';
+    res.send(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Bin ID</title>
+      </head>
+      <body>
+          <h1>Current Bin ID</h1>
+          <p id="binId">${binId}</p>
+      </body>
+      </html>
+    `);
   } catch (error) {
-      console.error('Error fetching Bin ID:', error);
-      res.status(500).send('Error loading Bin ID');
+    res.status(500).send('Internal server error');
   }
 });
 
